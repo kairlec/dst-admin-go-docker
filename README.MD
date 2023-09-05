@@ -10,7 +10,7 @@
     version: '3'
 
     services:
-    dst-admin-go:
+      dst-admin-go:
         image: kairlec/dst-admin-go:latest
         container_name: dst-admin-go
         ports:
