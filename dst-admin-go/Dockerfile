@@ -44,8 +44,6 @@ LABEL org.opencontainers.image.source "https://github.com/kairlec/dst-admin-go-d
 LABEL org.opencontainers.image.title "kairlec/dst-admin-go"
 LABEL org.opencontainers.image.description "DoNotStarveTogehter server panel written in golang.  github: https://github.com/hujinbo23/dst-admin-go"
 
-COPY prepare.sh /app/prepare.sh
-
 RUN dpkg --add-architecture i386 && \
     apt-get update && \
     apt-get install -y --no-install-recommends --no-install-suggests \
@@ -59,9 +57,7 @@ RUN dpkg --add-architecture i386 && \
     procps \
     sudo \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* \
-    && chmod +x /app/prepare.sh \
-    && /app/prepare.sh
+    && rm -rf /var/lib/apt/lists/*
 
 RUN curl http://media.steampowered.com/installer/steamcmd_linux.tar.gz | tar -zxvf - -C ${STEAMCMD_PATH} && \
     ${STEAMCMD_PATH}/steamcmd.sh +force_install_dir ${DST_SERVER_PATH} +login anonymous +app_update 343050 validate +quit && \
