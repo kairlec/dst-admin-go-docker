@@ -60,11 +60,14 @@ RUN dpkg --add-architecture i386 && \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-RUN curl http://media.steampowered.com/installer/steamcmd_linux.tar.gz | tar -zxvf - -C ${STEAMCMD_PATH} && \
-    ${STEAMCMD_PATH}/steamcmd.sh +force_install_dir ${DST_SERVER_PATH} +login anonymous +app_update 343050 validate +quit && \
+RUN mkdir -p ${STEAMCMD_PATH} && \
+    mkdir -p ${DST_SERVER_PATH} && \
     mkdir -p $USER_DIR/.klei/DoNotStarveTogether/MyDediServer/ && \
     mkdir -p /app/backup && \
     mkdir -p /app/mod
+
+RUN curl -s -L http://media.steampowered.com/installer/steamcmd_linux.tar.gz | tar -zxvf - -C ${STEAMCMD_PATH} && \
+    ${STEAMCMD_PATH}/steamcmd.sh +force_install_dir ${DST_SERVER_PATH} +login anonymous +app_update 343050 validate +quit
 
 RUN echo "steamcmd=${STEAMCMD_PATH}" >> /app/dst_config && \
    echo "force_install_dir=${DST_SERVER_PATH}" >> /app/dst_config && \
@@ -76,15 +79,15 @@ RUN echo "steamcmd=${STEAMCMD_PATH}" >> /app/dst_config && \
    echo "displayName=admin" >> /app/password.txt && \
    echo "photoURL=xxx" >> /app/password.txt
 
-RUN chmod +x /app/dst-admin-go
-
-WORKDIR /app
-
 COPY --from=go-builder   /go/src/github.com/hujinbo23/dst-admin-go/dst-admin-go /app/dst-admin-go
 COPY --from=go-builder   /go/src/github.com/hujinbo23/dst-admin-go/config.yml /app/config.yml
 COPY --from=go-builder   /go/src/github.com/hujinbo23/dst-admin-go/static /app/static
 COPY --from=node-builder /go/src/github.com/hujinbo23/dst-manage-web/build /app/dist
 COPY --from=go-builder   /go/src/github.com/hujinbo23/dst-admin-go/dst_config /app/dst_config
+
+RUN chmod +x /app/dst-admin-go
+
+WORKDIR /app
 
 EXPOSE 8082/tcp
 EXPOSE 10888/udp
