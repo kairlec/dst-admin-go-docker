@@ -51,6 +51,7 @@ RUN dpkg --add-architecture i386 && \
     libstdc++6 \
     libgcc1 \
     libcurl4-gnutls-dev \
+    curl \
     wget \
     ca-certificates \
     screen \
