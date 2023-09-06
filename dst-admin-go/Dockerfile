@@ -75,7 +75,6 @@ COPY --from=go-builder   /go/src/github.com/hujinbo23/dst-admin-go/dst-admin-go 
 COPY --from=go-builder   /go/src/github.com/hujinbo23/dst-admin-go/config.yml /app/config.yml
 COPY --from=go-builder   /go/src/github.com/hujinbo23/dst-admin-go/static /app/static
 COPY --from=node-builder /go/src/github.com/hujinbo23/dst-manage-web/build /app/dist
-COPY --from=go-builder   /go/src/github.com/hujinbo23/dst-admin-go/dst_config /app/dst_config
 
 RUN echo "steamcmd=${STEAMCMD_PATH}" >> /app/dst_config && \
    echo "force_install_dir=${DST_SERVER_PATH}" >> /app/dst_config && \
