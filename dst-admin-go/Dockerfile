@@ -81,6 +81,7 @@ RUN echo "steamcmd=${STEAMCMD_PATH}" >> /app/dst_config && \
    echo "cluster=MyDediServer" >> /app/dst_config && \
    echo "backup=/app/backup" >> /app/dst_config && \
    echo "mod_download_path=/app/mod" >> /app/dst_config && \
+   echo "bin=64" >> /app/dst_config && \
    echo "username=admin" >> /app/password.txt && \
    echo "password=123456" >> /app/password.txt && \
    echo "displayName=admin" >> /app/password.txt && \
