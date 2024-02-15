@@ -1,7 +1,7 @@
 ARG GO_VERSION=1.19
 ARG OS=linux
 ARG ARCH=amd64
-ARG ADMIN_BRANCH=docker
+ARG ADMIN_BRANCH=main
 ARG WEB_BRANCH=main
 ARG STEAMCMD_PATH=/app/steamcmd
 ARG DST_SERVER_PATH=/app/dst-dedicated-server
