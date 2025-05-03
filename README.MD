@@ -79,7 +79,7 @@
 
 ## 引用
 - [dst-admin-go](https://github.com/carrot-hu23/dst-admin-go)
-- [dst-manage-web](https://github.com/carrot-hu23/dst-manage-web)
+- [dst-manage-web2](https://github.com/carrot-hu23/dst-manage-web2)
 
 ## 问题
 - **与[官方镜像](https://hub.docker.com/r/carrot-hu23/dst-admin-go)有何不同?**
