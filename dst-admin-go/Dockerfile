@@ -13,7 +13,7 @@ ARG WEB_BRANCH
 RUN apk add --no-cache git
 RUN mkdir -p /go/src/github.com/hujinbo23 && \
     cd /go/src/github.com/hujinbo23 && \
-    git clone https://github.com/hujinbo23/dst-manage-web -b ${WEB_BRANCH} --depth=1 && \
+    git clone https://github.com/carrot-hu23/dst-manage-web2 dst-manage-web -b ${WEB_BRANCH} --depth=1 && \
     cd dst-manage-web && \
     npm install && \
     npm run build
@@ -74,7 +74,7 @@ RUN curl -s -L http://media.steampowered.com/installer/steamcmd_linux.tar.gz | t
 COPY --from=go-builder   /go/src/github.com/hujinbo23/dst-admin-go/dst-admin-go /app/dst-admin-go
 COPY --from=go-builder   /go/src/github.com/hujinbo23/dst-admin-go/config.yml /app/config.yml
 COPY --from=go-builder   /go/src/github.com/hujinbo23/dst-admin-go/static /app/static
-COPY --from=node-builder /go/src/github.com/hujinbo23/dst-manage-web/build /app/dist
+COPY --from=node-builder /go/src/github.com/hujinbo23/dst-manage-web/dist /app/dist
 
 RUN echo "steamcmd=${STEAMCMD_PATH}" >> /app/dst_config && \
    echo "force_install_dir=${DST_SERVER_PATH}" >> /app/dst_config && \
@@ -85,7 +85,9 @@ RUN echo "steamcmd=${STEAMCMD_PATH}" >> /app/dst_config && \
    echo "username=admin" >> /app/password.txt && \
    echo "password=123456" >> /app/password.txt && \
    echo "displayName=admin" >> /app/password.txt && \
-   echo "photoURL=xxx" >> /app/password.txt
+   echo "photoURL=xxx" >> /app/password.txt && \
+   touch /app/dst-db && \
+   touch /app/dst-admin-go.log
 
 RUN chmod +x /app/dst-admin-go
 

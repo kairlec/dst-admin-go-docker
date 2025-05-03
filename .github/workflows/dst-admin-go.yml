@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - dst-admin-go/*
+      - dst-admin-go/Dockerfile
       - .github/workflows/dst-admin-go.yml
   workflow_dispatch:
   schedule:
